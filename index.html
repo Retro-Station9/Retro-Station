@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retro Station - Premium Gaming Devices</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/store.css" />
+
+  <style>
+    /* ================= RETRO STATION COLOR PALETTE ================= */
+    :root {
+      --primary-cyan: #00D9FF;
+      --primary-purple: #7D3FFF;
+      --secondary-purple: #5B21B6;
+      --dark-bg: #0A0E27;
+      --dark-secondary: #1a1f3a;
+      --accent-gold: #FFD700;
+      --accent-pink: #FF006E;
+      --text-light: #E0E0E0;
+      --text-white: #FFFFFF;
+      --border-neon: rgba(0, 217, 255, 0.3);
+      --glow-cyan: 0 0 20px rgba(0, 217, 255, 0.6);
+      --glow-purple: 0 0 20px rgba(125, 63, 255, 0.6);
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Inter", "Poppins", sans-serif;
+      background: linear-gradient(135deg, var(--dark-bg) 0%, #1a0b2e 100%);
+      color: var(--text-light);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ================= NAVBAR ================= */
+    .navbar-premium {
+      background: rgba(10, 14, 39, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 2px solid var(--border-neon);
+      box-shadow: 0 10px 40px rgba(0, 217, 255, 0.1);
+      animation: navbarEnter 0.8s ease forwards;
+      position: fixed;
+      top: 0;
+      z-index: 1100;
+    }
+
+    @keyframes navbarEnter {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .navbar-brand {
+      position: relative;
+      font-weight: 800;
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      letter-spacing: 0.5px;
+      transition: all var(--transition);
+      overflow: hidden;
+    }
+
+    .navbar-logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 18px rgba(0, 217, 255, 0.35);
+      border: 1px solid rgba(0, 217, 255, 0.25);
+    }
+
+    .navbar-brand i {
+      font-size: 1.8rem;
+      color: var(--primary-cyan);
+      animation: iconGlow 2s ease-in-out infinite;
+      text-shadow: var(--glow-cyan);
+    }
+
+    @keyframes iconGlow {
+      0%, 100% { text-shadow: var(--glow-cyan); }
+      50% { text-shadow: 0 0 30px rgba(0, 217, 255, 0.8); }
+    }
+
+    .navbar-brand::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(0, 217, 255, 0.2), transparent);
+      transform: skewX(-20deg);
+      transition: 0.6s;
+    }
+
+    .navbar-brand:hover::after { left: 130%; }
+    .navbar-brand:hover { transform: scale(1.05); text-shadow: 0 0 8px rgba(0, 217, 255, 0.4); }
+    .navbar-brand:hover i { transform: rotate(10deg) scale(1.1); color: var(--accent-gold); }
+    .navbar-brand:active { transform: scale(0.97); }
+
+    .navbar-premium .nav-link {
+      color: var(--text-light);
+      font-weight: 600;
+      margin: 0 0.8rem;
+      position: relative;
+      transition: all var(--transition);
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    .navbar-premium .nav-link:hover,
+    .navbar-premium .nav-link.active {
+      color: var(--primary-cyan);
+      text-shadow: var(--glow-cyan);
+      transform: translateY(-1px);
+    }
+
+    .navbar-premium .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -4px;
+      width: 0%; height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--primary-cyan), var(--primary-purple));
+      transition: width var(--transition);
+    }
+
+    .navbar-premium .nav-link:hover::after,
+    .navbar-premium .nav-link.active::after { width: 100%; }
+
+    /* ================= HERO SECTION ================= */
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a0b2e 50%, #2d0f4a 100%);
+    }
+
+    .hero-background {
+      position: absolute;
+      inset: 0;
+      opacity: 0.3;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(0, 217, 255, 0.2), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(125, 63, 255, 0.2), transparent 50%);
+      animation: heroFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(20px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      animation: fadeInUp 1.2s ease forwards;
+      max-width: 800px;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-logo {
+      width: 200px; height: 200px;
+      margin: 0 auto 2rem;
+      animation: logoRotate 20s linear infinite;
+      filter: drop-shadow(0 0 30px rgba(0, 217, 255, 0.45));
+    }
+
+    .hero-logo-frame {
+      position: relative;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(0, 217, 255, 0.55);
+      box-shadow: 0 0 24px rgba(0, 217, 255, 0.35), inset 0 0 18px rgba(125, 63, 255, 0.18);
+    }
+
+    .hero-logo-img {
+      width: 100%; height: 100%; display: block;
+      object-fit: cover;
+      filter: saturate(1.15) contrast(1.05);
+    }
+
+    @keyframes logoRotate {
+      0% { transform: rotateZ(0deg); }
+      100% { transform: rotateZ(360deg); }
+    }
+
+    .hero-title {
+      font-size: clamp(1.55rem, 6.5vw, 4rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-purple) 50%, var(--accent-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      animation: titleGlow 3s ease-in-out infinite;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 1.65rem;
+        letter-spacing: 0.06em;
+        line-height: 1.15;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hero-title {
+        font-size: 1.4rem;
+        letter-spacing: 0.04em;
+      }
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.3)); }
+      50% { filter: drop-shadow(0 0 25px rgba(0, 217, 255, 0.6)); }
+    }
+
+    .hero-tagline {
+      font-size: 1.3rem;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+      50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary-neon, .btn-secondary-neon {
+      padding: 1rem 2.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary-neon {
+      background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+      color: var(--text-white);
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-primary-neon:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px rgba(0, 217, 255, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary-neon {
+      background: transparent;
+      border: 2px solid var(--primary-cyan);
+      color: var(--primary-cyan);
+    }
+
+    .btn-secondary-neon:hover {
+      background: var(--primary-cyan);
+      color: var(--dark-bg);
+      transform: translateY(-3px);
+      box-shadow: 0 0 30px rgba(0, 217, 255, 0.6);
+    }
+
+    /* ================= HOW TO ORDER STEPPER (above products) ================= */
+    .order-stepper-section {
+      padding: 5rem 2rem;
+      background: linear-gradient(180deg, rgba(37, 211, 102, 0.03), transparent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stepper-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .stepper-line {
+      position: absolute;
+      top: 35px; left: calc(10% + 25px); right: calc(10% + 25px);
+      height: 3px;
+      background: linear-gradient(90deg, #25d366, #128c7e);
+      opacity: 0.25;
+      z-index: 0;
+    }
+
+    .stepper-line::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, #25d366, #128c7e);
+      transform-origin: left;
+      animation: lineGrow 1.8s ease-out forwards;
+      opacity: 1;
+      z-index: 1;
+    }
+
+    @keyframes lineGrow {
+      0% { transform: scaleX(0); }
+      100% { transform: scaleX(1); }
+    }
+
+    .step-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: stepFadeIn 0.6s ease forwards;
+    }
+
+    .step-item:nth-child(1) { animation-delay: 0.2s; }
+    .step-item:nth-child(2) { animation-delay: 0.5s; }
+    .step-item:nth-child(3) { animation-delay: 0.8s; }
+    .step-item:nth-child(4) { animation-delay: 1.1s; }
+
+    @keyframes stepFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-circle {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1e2a4a, #0e1533);
+      border: 3px solid #25d366;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.25), inset 0 0 10px rgba(37, 211, 102, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem; font-weight: 900; color: #25d366;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s;
+      animation: pulseCircle 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulseCircle {
+      0%, 100% { box-shadow: 0 0 20px rgba(37, 211, 102, 0.25); }
+      50% { box-shadow: 0 0 35px rgba(37, 211, 102, 0.5); }
+    }
+
+    .step-item:hover .step-circle {
+      transform: scale(1.1);
+      border-color: #00ff88;
+      box-shadow: 0 0 40px rgba(0, 255, 136, 0.6);
+    }
+
+    .step-title {
+      font-size: 1.3rem; font-weight: 800;
+      color: var(--primary-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+    }
+
+    .step-description {
+      color: var(--text-light);
+      font-size: 0.95rem; line-height: 1.7;
+      max-width: 200px; margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .stepper-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+      .stepper-line { display: none; }
+      .step-item {
+        flex-direction: row;
+        text-align: left;
+        width: 100%; max-width: 360px;
+        gap: 1.5rem;
+      }
+      .step-circle { margin-bottom: 0; }
+
+      #productsGrid { --bs-gutter-x: 0.85rem; --bs-gutter-y: 0.95rem; }
+      #productsGrid .product-card { height: 100%; border-width: 1px; border-radius: 16px; }
+      #productsGrid .product-image { height: 220px; }
+      #productsGrid .product-info {
+        display: flex; flex-direction: column; min-height: auto; padding: 1.1rem 1rem;
+      }
+      #productsGrid .product-name {
+        min-height: 0; margin-bottom: 0.55rem; font-size: 1.05rem; line-height: 1.3;
+      }
+      #productsGrid .product-description {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 0.85rem;
+        font-size: 0.88rem;
+      }
+      #productsGrid .product-price { margin-bottom: 0.85rem; font-size: 1.35rem; }
+      #productsGrid .product-actions { display: block; margin-top: auto; }
+      #productsGrid .btn-add-cart { padding: 0.8rem 0.5rem; font-size: 0.85rem; }
+      #productsGrid .variant-option { padding: 0.55rem 0.7rem; font-size: 0.72rem; }
+      #productsGrid .variant-option-price { font-size: 0.7rem; }
+      #productsGrid .product-badge {
+        top: 0.85rem; right: 0.75rem; max-width: calc(100% - 1.5rem);
+        padding: 0.4rem 0.75rem; overflow: hidden; font-size: 0.68rem;
+        letter-spacing: 0.04em; text-overflow: ellipsis; white-space: nowrap;
+      }
+    }
+
+    /* ================= FEATURED PRODUCTS ================= */
+    .featured-section {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(125, 63, 255, 0.05) 100%);
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 4rem;
+      animation: fadeInDown 1s ease forwards;
+    }
+
+    .section-title {
+      font-size: 3rem; font-weight: 900; text-transform: uppercase;
+      background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+    }
+
+    .product-card {
+      background: linear-gradient(135deg, rgba(26, 31, 58, 0.8), rgba(93, 33, 182, 0.3));
+      border: 2px solid var(--border-neon);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all var(--transition);
+      position: relative;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      animation: cardEnter 0.8s ease forwards;
+    }
+
+    @keyframes cardEnter {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .product-card::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(0, 217, 255, 0.1), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+      z-index: 1;
+    }
+
+    .product-card:hover::before { opacity: 1; }
+    .product-card:hover {
+      transform: translateY(-15px);
+      border-color: var(--primary-cyan);
+      box-shadow: 0 20px 60px rgba(0, 217, 255, 0.3), inset 0 0 20px rgba(0, 217, 255, 0.1);
+    }
+
+    .product-image {
+      width: 100%; height: 280px;
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(125, 63, 255, 0.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 85%; height: 85%;
+      object-fit: contain;
+      transition: transform var(--transition);
+      position: relative; z-index: 2;
+      filter: drop-shadow(0 10px 25px rgba(0, 217, 255, 0.3));
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.15) translateY(-10px) rotate(5deg);
+      filter: drop-shadow(0 15px 35px rgba(0, 217, 255, 0.5));
+    }
+
+    .product-info {
+      padding: 2rem 1.5rem;
+      position: relative; z-index: 2;
+    }
+
+    .product-name {
+      font-size: 1.3rem; font-weight: 800;
+      color: var(--primary-cyan);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all var(--transition);
+    }
+
+    .product-card:hover .product-name {
+      color: var(--accent-gold);
+      text-shadow: var(--glow-cyan);
+    }
+
+    .product-description {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .product-price {
+      font-size: 1.8rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-gold), var(--primary-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: linear-gradient(135deg, var(--accent-pink), var(--primary-purple));
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 3;
+      box-shadow: 0 0 20px rgba(255, 0, 110, 0.4);
+      animation: badgeBounce 2s ease-in-out infinite;
+    }
+
+    .product-badge.is-oos {
+      background: linear-gradient(135deg, #6b7280, #374151);
+      box-shadow: 0 0 16px rgba(55, 65, 81, 0.45);
+      animation: none;
+    }
+
+    .product-card.is-oos .product-image img {
+      filter: grayscale(0.35) brightness(0.85);
+    }
+
+    .product-variants {
+      display: grid;
+      gap: 0.45rem;
+      margin: -0.6rem 0 1rem;
+    }
+
+    .variant-option {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 217, 255, 0.22);
+      background: rgba(0, 217, 255, 0.05);
+      color: var(--text-light);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .variant-option-label { flex: 1; line-height: 1.3; }
+    .variant-option-price {
+      color: var(--accent-gold);
+      white-space: nowrap;
+      font-size: 0.7rem;
+    }
+
+    .variant-option:hover,
+    .variant-option.is-active {
+      border-color: rgba(0, 217, 255, 0.55);
+      background: rgba(0, 217, 255, 0.14);
+      box-shadow: 0 0 16px rgba(0, 217, 255, 0.18);
+    }
+
+    .product-badge.is-offer-badge {
+      background: linear-gradient(135deg, #ff3d6e, #ffb703);
+      box-shadow: 0 0 22px rgba(255, 61, 110, 0.55);
+      animation: offerPulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes offerPulse {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-3px) scale(1.05); }
+    }
+
+    .product-price-wrap {
+      margin-bottom: 0.85rem;
+    }
+
+    .product-price.is-sale {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.55rem 0.75rem;
+      background: none;
+      -webkit-text-fill-color: initial;
+    }
+
+    .product-price.is-sale .price-was {
+      font-size: 0.95rem;
+      color: rgba(224, 224, 224, 0.55);
+      text-decoration: line-through;
+      font-weight: 700;
+    }
+
+    .product-price.is-sale .price-now {
+      font-size: 1.55rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffb703, #ff006e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .product-offer-note {
+      margin-top: 0.35rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.28rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      color: #1a1020;
+      background: linear-gradient(135deg, #ffd60a, #ff006e);
+      box-shadow: 0 0 18px rgba(255, 0, 110, 0.35);
+      animation: offerShine 2.4s ease-in-out infinite;
+    }
+
+    @keyframes offerShine {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.12); }
+    }
+
+    .variant-option.offer-deal {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      padding: 0.85rem 0.85rem 0.75rem;
+      border: 2px solid rgba(255, 183, 3, 0.55);
+      background:
+        linear-gradient(135deg, rgba(255, 0, 110, 0.18), rgba(255, 183, 3, 0.12)),
+        rgba(26, 31, 58, 0.95);
+      box-shadow: 0 0 24px rgba(255, 0, 110, 0.22);
+    }
+
+    .variant-option.offer-deal::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.12) 48%, transparent 65%);
+      transform: translateX(-120%);
+      animation: offerSweep 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes offerSweep {
+      0%, 55% { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    .offer-ribbon {
+      position: absolute;
+      top: 0.55rem;
+      inset-inline-end: 0.55rem;
+      min-width: 48px;
+      padding: 0.28rem 0.45rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff006e, #ff3d6e);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-align: center;
+      box-shadow: 0 0 16px rgba(255, 0, 110, 0.5);
+      z-index: 1;
+    }
+
+    .offer-deal-body {
+      display: grid;
+      gap: 0.28rem;
+      padding-inline-end: 3.2rem;
+      text-align: start;
+    }
+
+    .offer-kicker {
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffd60a;
+    }
+
+    .offer-deal .variant-option-label {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .offer-price-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.45rem 0.7rem;
+      margin-top: 0.15rem;
+    }
+
+    .offer-price-row .price-was {
+      font-size: 0.78rem;
+      color: rgba(224, 224, 224, 0.55);
+      text-decoration: line-through;
+      font-weight: 700;
+    }
+
+    .offer-price-row .price-now {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #ffd60a;
+      text-shadow: 0 0 12px rgba(255, 214, 10, 0.35);
+    }
+
+    .offer-price-row .price-now small {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.8);
+      margin-inline-start: 0.2rem;
+    }
+
+    .offer-hint {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #ff9ebd;
+      letter-spacing: 0.02em;
+    }
+
+    .variant-option.offer-deal:hover,
+    .variant-option.offer-deal.is-active {
+      border-color: rgba(255, 214, 10, 0.9);
+      background:
+        linear-gradient(135deg, rgba(255, 0, 110, 0.28), rgba(255, 183, 3, 0.2)),
+        rgba(26, 31, 58, 0.98);
+      box-shadow: 0 0 30px rgba(255, 0, 110, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-add-cart.is-disabled,
+    .btn-add-cart:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+      background: #4b5563;
+    }
+
+    @keyframes badgeBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .btn-add-cart {
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      border: none;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+      box-shadow: 0 0 22px rgba(125, 63, 255, 0.28);
+    }
+
+    .btn-add-cart:hover {
+      transform: translateY(-2px);
+      color: #fff;
+      box-shadow: 0 0 30px rgba(255, 0, 110, 0.35);
+    }
+
+    /* ================= REVIEWS GALLERY ================= */
+    .testimonials-section {
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 15% 20%, rgba(0, 217, 255, 0.12), transparent 45%),
+        radial-gradient(ellipse at 85% 80%, rgba(125, 63, 255, 0.14), transparent 50%),
+        linear-gradient(180deg, rgba(10, 14, 39, 0.2), rgba(26, 11, 46, 0.55));
+    }
+
+    .testimonials-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 217, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 217, 255, 0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at center, #000 35%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .reviews-hint {
+      text-align: center;
+      color: rgba(224, 224, 224, 0.75);
+      font-size: 0.95rem;
+      margin: -0.5rem auto 2.25rem;
+      max-width: 520px;
+    }
+
+    .reviews-hint i {
+      color: var(--primary-cyan);
+      margin-inline-end: 0.35rem;
+    }
+
+    .reviews-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.15rem;
+      max-width: 1180px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .review-tile {
+      position: relative;
+      border: 0;
+      padding: 0;
+      border-radius: 22px;
+      overflow: hidden;
+      cursor: pointer;
+      background: linear-gradient(160deg, rgba(26, 31, 58, 0.95), rgba(10, 14, 39, 0.95));
+      border: 1px solid rgba(0, 217, 255, 0.22);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      aspect-ratio: 9 / 16;
+      transform: translateY(0) scale(1);
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      animation: reviewRise 0.7s ease both;
+    }
+
+    .review-tile:nth-child(4n + 2) { animation-delay: 0.05s; }
+    .review-tile:nth-child(4n + 3) { animation-delay: 0.1s; }
+    .review-tile:nth-child(4n + 4) { animation-delay: 0.15s; }
+
+    @keyframes reviewRise {
+      from { opacity: 0; transform: translateY(28px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .review-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.55s ease, filter 0.35s ease;
+    }
+
+    .review-tile-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.45rem;
+      padding: 1rem;
+      background: linear-gradient(180deg, transparent 45%, rgba(6, 8, 22, 0.88) 100%);
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+
+    .review-tile-overlay span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(0, 217, 255, 0.14);
+      border: 1px solid rgba(0, 217, 255, 0.4);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transform: translateY(8px);
+      transition: transform 0.35s ease;
+    }
+
+    .review-tile:hover,
+    .review-tile:focus-visible {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(0, 217, 255, 0.65);
+      box-shadow:
+        0 24px 50px rgba(0, 0, 0, 0.45),
+        0 0 28px rgba(0, 217, 255, 0.28);
+      outline: none;
+    }
+
+    .review-tile:hover img,
+    .review-tile:focus-visible img {
+      transform: scale(1.06);
+      filter: brightness(1.05);
+    }
+
+    .review-tile:hover .review-tile-overlay,
+    .review-tile:focus-visible .review-tile-overlay {
+      opacity: 1;
+    }
+
+    .review-tile:hover .review-tile-overlay span,
+    .review-tile:focus-visible .review-tile-overlay span {
+      transform: translateY(0);
+    }
+
+    .review-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background: rgba(4, 6, 18, 0.88);
+      backdrop-filter: blur(14px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.28s ease, visibility 0.28s ease;
+    }
+
+    .review-lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .review-lightbox-dialog {
+      position: relative;
+      width: min(460px, 100%);
+      max-height: min(92vh, 920px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transform: translateY(18px) scale(0.96);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .review-lightbox.is-open .review-lightbox-dialog {
+      transform: translateY(0) scale(1);
+    }
+
+    .review-lightbox-frame {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 217, 255, 0.35);
+      background: #0b1028;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        0 0 40px rgba(0, 217, 255, 0.18);
+      max-height: calc(92vh - 70px);
+    }
+
+    .review-lightbox-frame img {
+      width: 100%;
+      height: auto;
+      max-height: calc(92vh - 70px);
+      object-fit: contain;
+      display: block;
+      background: #05070f;
+    }
+
+    .review-lightbox-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      color: #fff;
+    }
+
+    .review-lightbox-count {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--primary-cyan);
+      font-size: 0.9rem;
+    }
+
+    .review-lightbox-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .review-lightbox-btn {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(0, 217, 255, 0.35);
+      border-radius: 12px;
+      background: rgba(0, 217, 255, 0.1);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .review-lightbox-btn:hover {
+      background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+
+    .review-lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(10, 14, 39, 0.75);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .review-lightbox-nav.prev { left: 0.65rem; }
+    .review-lightbox-nav.next { right: 0.65rem; }
+
+    body.is-rtl .review-lightbox-nav.prev { left: auto; right: 0.65rem; }
+    body.is-rtl .review-lightbox-nav.next { right: auto; left: 0.65rem; }
+
+    .review-lightbox-nav:hover {
+      background: rgba(0, 217, 255, 0.25);
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.35);
+    }
+
+    body.lightbox-open { overflow: hidden; }
+
+    @media (max-width: 1024px) {
+      .reviews-gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 768px) {
+      .reviews-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+      .review-tile { border-radius: 16px; }
+      .review-lightbox { padding: 0.75rem; }
+      .review-lightbox-nav { width: 40px; height: 40px; }
+      .review-lightbox-nav.prev { left: 0.35rem; }
+      .review-lightbox-nav.next { right: 0.35rem; }
+    }
+
+    /* ================= FOOTER ================= */
+    .footer {
+      background: linear-gradient(135deg, rgba(10, 14, 39, 0.95), rgba(26, 20, 50, 0.95));
+      border-top: 2px solid var(--border-neon);
+      backdrop-filter: blur(10px);
+      padding: 4rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-glow {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 80%, rgba(0, 217, 255, 0.1), transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(125, 63, 255, 0.1), transparent 50%);
+      pointer-events: none;
+    }
+
+    .footer-content { position: relative; z-index: 2; }
+
+    .footer-brand h3 {
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      font-weight: 900;
+    }
+
+    .footer-brand p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
+    .footer-section h4 { color: var(--primary-cyan); font-weight: 800; margin-bottom: 1.5rem; text-transform: uppercase; }
+    .footer-links { list-style: none; padding-left: 0; }
+    .footer-links li { margin-bottom: 0.8rem; }
+    .footer-links a { color: var(--text-light); text-decoration: none; transition: all var(--transition); font-weight: 500; }
+    .footer-links a:hover { color: var(--primary-cyan); text-shadow: 0 0 10px rgba(0, 217, 255, 0.4); }
+    .social-links { display: flex; gap: 1rem; margin: 1.5rem 0; }
+    .social-links a { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple)); display: flex; align-items: center; justify-content: center; color: white; transition: all var(--transition); }
+    .social-links a:hover { transform: translateY(-5px) scale(1.1); }
+    .footer-bottom { border-top: 1px solid var(--border-neon); padding-top: 2rem; margin-top: 3rem; text-align: center; }
+    .footer-bottom p { margin: 0; }
+
+    /* Pixel subtitle */
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    .pixel-subtitle-wrap { margin: 0 auto 2.5rem; max-width: 920px; display: grid; place-items: center; }
+    .pixel-subtitle-line { padding: 6px 4px; text-align: center; filter: drop-shadow(0 0 12px rgba(0,217,255,0.18)) drop-shadow(0 0 18px rgba(125,63,255,0.14)); animation: breatheGlow 2.8s ease-in-out infinite; }
+    .pixel-subtitle { font-family: "Press Start 2P", sans-serif; font-size: clamp(0.78rem, 1.15vw, 0.98rem); line-height: 2.05; letter-spacing: 0.06em; text-transform: uppercase; background: linear-gradient(135deg, var(--accent-gold), var(--primary-cyan), var(--primary-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .pixel-cursor { display: inline-block; width: 10px; height: 16px; margin-left: 8px; background: linear-gradient(135deg, var(--accent-gold), var(--primary-cyan)); animation: cursorBlink 800ms steps(1) infinite; }
+    @keyframes cursorBlink { 0%,49% { opacity:1; } 50%,100% { opacity:0; } }
+    @keyframes breatheGlow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg navbar-premium">
+    <div class="container">
+      <a class="navbar-brand" href="#home">
+        <img src="./Images/logo.png" alt="Retro Station Logo" class="navbar-logo" data-store-logo />
+        <i class="fas fa-joystick"></i>
+        <span class="brand-text">Retro Station</span>
+      </a>
+
+      <a class="nav-link cart-nav-link nav-cart-mobile" href="cart.html" data-i18n-title="nav.cart">
+        <i class="fas fa-shopping-cart"></i> <span data-i18n="nav.cart">Cart</span>
+        <span class="cart-badge" data-cart-badge></span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="#home" data-i18n="nav.home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="./about.html" data-i18n="nav.about">About</a></li>
+          <li class="nav-item">
+            <a class="nav-link cart-nav-link" href="cart.html" data-i18n-title="nav.cart">
+              <i class="fas fa-shopping-cart"></i> <span data-i18n="nav.cart">Cart</span>
+              <span class="cart-badge" data-cart-badge></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero-section" id="home">
+    <div class="hero-background"></div>
+    <div class="hero-content">
+      <div class="hero-logo">
+        <div class="hero-logo-frame">
+          <img src="./Images/logo.png" alt="Retro Station Logo" class="hero-logo-img" data-store-logo width="200" height="200" />
+        </div>
+      </div>
+      <h1 class="hero-title" data-i18n-html="index.heroTitleHtml">Retro <span style="color: var(--accent-gold);">Station</span></h1>
+      <p class="hero-tagline" data-i18n="hero.tagline">OLD IS GOLD</p>
+      <div class="hero-subtitle pixel-subtitle-wrap">
+        <div class="pixel-subtitle-line">
+          <span class="pixel-subtitle" id="pixelSubtitle" data-i18n-pixel="hero.subtitle"></span>
+          <span class="pixel-cursor"></span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn-primary-neon" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})" data-i18n="hero.shopNow">Shop Now</button>
+        <a class="btn-secondary-neon" href="./about.html" data-i18n="hero.learnMore">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= FEATURED PRODUCTS ================= -->
+  <section class="featured-section" id="products">
+    <div class="container">
+      <div class="section-heading">
+        <h2 class="section-title" data-i18n="sections.featuredTitle">Featured Devices</h2>
+        <p class="section-subtitle" data-i18n="sections.featuredSub">Next Generation Retro Gaming</p>
+      </div>
+
+      <div class="row g-4" id="productsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= REVIEWS ================= -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-heading">
+        <h2 class="section-title" data-i18n="sections.testimonialsTitle">What Gamers Say</h2>
+        <p class="section-subtitle" data-i18n="sections.testimonialsSub">Real customer reviews from our community</p>
+      </div>
+      <p class="reviews-hint">
+        <i class="fas fa-expand"></i>
+        <span data-i18n="reviews.hint">Tap any review to open it full size</span>
+      </p>
+      <div class="reviews-gallery" id="reviewsGallery" aria-label="Customer reviews"></div>
+    </div>
+  </section>
+
+  <div class="review-lightbox" id="reviewLightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Review viewer">
+    <div class="review-lightbox-dialog">
+      <div class="review-lightbox-toolbar">
+        <div class="review-lightbox-count" id="reviewLightboxCount">1 / 14</div>
+        <div class="review-lightbox-actions">
+          <button type="button" class="review-lightbox-btn" id="reviewLightboxPrevBtn" aria-label="Previous review">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button type="button" class="review-lightbox-btn" id="reviewLightboxNextBtn" aria-label="Next review">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <button type="button" class="review-lightbox-btn" id="reviewLightboxClose" aria-label="Close review">
+            <i class="fas fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="review-lightbox-frame">
+        <button type="button" class="review-lightbox-nav prev" id="reviewLightboxPrev" aria-label="Previous review">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <img id="reviewLightboxImage" src="" alt="Customer review">
+        <button type="button" class="review-lightbox-nav next" id="reviewLightboxNext" aria-label="Next review">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  //this is the step by step order
+
+    <section class="order-stepper-section" id="how-to-order">
+    <div class="container">
+      <div class="section-heading">
+        <h2 class="section-title" data-i18n="sections.orderTitle">How to Order</h2>
+        <p class="section-subtitle" data-i18n="sections.orderSub">Simple & Fast Checkout</p>
+      </div>
+
+      <div class="stepper-container">
+        <div class="stepper-line" aria-hidden="true"></div>
+
+        <div class="step-item">
+          <div class="step-circle">1</div>
+          <div class="step-text-block">
+            <h3 class="step-title" data-i18n="steps.s1.title">Browse & Add</h3>
+            <p class="step-description" data-i18n="steps.s1.text">Choose your favorite products and add them to your cart.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-circle">2</div>
+          <div class="step-text-block">
+            <h3 class="step-title" data-i18n="steps.s2.title">Review Cart</h3>
+            <p class="step-description" data-i18n="steps.s2.text">Check quantities, apply coupons, and review your order details.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-circle">3</div>
+          <div class="step-text-block">
+            <h3 class="step-title" data-i18n="steps.s3.title">Order on WhatsApp</h3>
+            <p class="step-description" data-i18n="steps.s3.text">Tap checkout and send your order directly to us on WhatsApp.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-circle">4</div>
+          <div class="step-text-block">
+            <h3 class="step-title" data-i18n="steps.s4.title">Get Delivered</h3>
+            <p class="step-description" data-i18n="steps.s4.text">We confirm your order and deliver straight to your door.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer" id="contact">
+    <div class="footer-glow"></div>
+    <div class="footer-content">
+      <div class="container">
+        <div class="row g-4 mb-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-brand">
+              <h3><i class="fas fa-joystick me-2"></i>Retro Station</h3>
+              <p data-i18n="footer.brandDesc">Your ultimate destination for premium retro gaming devices and accessories.</p>
+              <div class="social-links">
+                <a href="https://www.instagram.com/retro.station.iq/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@retrostation_iq?_r=1&_t=ZS-98jW45B4bhc" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/9647506692030" target="_blank" rel="noopener noreferrer" data-whatsapp-contact aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 col-sm-6 footer-section">
+            <h4 data-i18n="footer.quickLinks">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="#home" data-i18n="nav.home">Home</a></li>
+              <li><a href="#products" data-i18n="nav.products">Products</a></li>
+              <li><a href="#testimonials" data-i18n="footer.reviews">Reviews</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-6 footer-section">
+            <h4 data-i18n="footer.support">Support</h4>
+            <ul class="footer-links">
+              <li><a href="#" data-i18n="footer.faq">FAQ</a></li>
+              <li><a href="#" data-i18n="footer.warranty">Warranty</a></li>
+              <li><a href="#" data-i18n="footer.returns">Returns</a></li>
+              <li><a href="https://wa.me/9647506692030" target="_blank" rel="noopener noreferrer" data-whatsapp-contact data-i18n="footer.contactUs">Contact Us</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-section">
+            <h4 data-i18n="footer.contactInfo">Contact Info</h4>
+            <p style="color:var(--text-light); margin-bottom:0.8rem;">
+              <i class="fas fa-phone me-2"></i><a href="tel:+9647506692030" data-store-phone style="color:var(--primary-cyan); text-decoration:none;">0750 669 2030</a>
+            </p>
+            <p style="color:var(--text-light); margin-bottom:0.8rem;">
+              <i class="fas fa-envelope me-2"></i><a href="mailto:support@retrostation.com" style="color:var(--primary-cyan); text-decoration:none;">support@retrostation.com</a>
+            </p>
+            <p style="color:var(--text-light);">
+              <i class="fas fa-map-marker-alt me-2"></i>123 Gaming Street, TX 75001
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p><span data-i18n="footer.rightsFull">© 2025 Retro Station. All rights reserved. |</span> <a href="#" style="text-decoration:none; color:var(--primary-cyan);" data-i18n="footer.privacy">Privacy Policy</a> | <a href="#" style="text-decoration:none; color:var(--primary-cyan);" data-i18n="footer.terms">Terms of Service</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- External scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+  <script src="./js/i18n.js"></script>
+
+  <!-- ================= EMBEDDED STORE.JS (with safe i18n fallback) ================= -->
+  <script>
+    // ---------- Safe translation helper ----------
+    const safeT = (key, fallback) => {
+      if (typeof t === "function") {
+        const translated = t(key);
+        if (translated !== key) return translated;   // i18n returned a real translation
+      }
+      return fallback;
+    };
+
+    // ---------- Your exact store config & data ----------
+    const STORE_CONFIG = {
+      name: "Retro Station",
+      currency: "IQD",
+      deliveryFee: 5000,
+      phone: "07506692030",
+      whatsappNumber: "9647506692030",
+      logo: "./Images/logo.png",
+      social: {
+        instagram: "https://www.instagram.com/retro.station.iq/",
+        tiktok: "https://www.tiktok.com/@retrostation_iq?_r=1&_t=ZS-98jW45B4bhc",
+        whatsapp: "https://wa.me/9647506692030",
+      },
+      coupons: {
+        RETROSTATIONJR44: { type: "percent", value: 0.1, label: "10% off" },
+      },
+    };
+
+    const PRODUCTS = [
+            {
+        id: 6, name: "Football Board", price: 15000, badge: "", image: "./Images/Football Board Game.png",
+        images: ["./Images/Football Board Game.png"],
+        description: "Fun tabletop board game for family, friends, parties, and offline entertainment.",
+        specs: ["Tabletop Board Game","Family-Friendly","Party & Friends","Offline Multiplayer","Easy to Learn","Replayable","Gift-Friendly","Portable Box"],
+        variants: [
+          { id: "buy-1", label: "Buy 1", labelKey: "variants.boardBuy1", price: 15000, packQty: 1 },
+          { id: "buy-2", label: "Buy 2", labelKey: "variants.boardBuy2", price: 14000, originalPrice: 15000, discountPercent: 11, packQty: 2, offer: true }
+        ]
+      },
+      {
+        id: 1, name: "R36S Handheld", price: 56000, badge: "", image: "./Images/R36S Purple.png",
+        images: ["./Images/R36S Purple.png","./Images/Rs36-noBackground.png","./Images/RS36.jpg"],
+        description: "Open-source retro gaming handheld with a 3.5-inch 640×480 IPS display, RK3326 processor options, 3200mAh battery, and support for thousands of classic games.",
+        specs: ["3.5-inch IPS Display","640×480 Resolution","128GB or 64GB Storage Options","Mali-G31 GPU","3200mAh Battery","Linux/Open-Source System","TF / MicroSD Storage Support","Supports Classic Retro Emulators","USB-C Charging","3.5mm Headphone Jack"],
+        variants: [
+          { id: "dual-core", label: "128GB · 25,000 Games", labelKey: "variants.r36sDual", price: 56000 },
+          { id: "one-core", label: "64GB · 15,000 Games", labelKey: "variants.r36sOne", price: 46000 }
+        ]
+      },
+      { id: 2, name: "M22 Handheld + 2 Controllers", price: 75000, badge: "", image: "./Images/amojr443.jpg", images: ["./Images/M22 Black.png","./Images/M22 Black 2.png","./Images/M22 white.png"], description: "Portable retro handheld with a large 5-inch IPS display, 3000mAh battery, and large-capacity game storage options.", specs: ["5.0-inch IPS Display","1920×1080 Listed Resolution","N909 Dual-Core 1.2GHz CPU","3000mAh Battery","64GB / 128GB TF Card Options","20,000+ Listed Games","Built-in Speaker","Multiple Language Support","Portable Lightweight Body","USB Charging"] },
+      { id: 3, name: "G28 Handheld", price: 69000, badge: "Out of Stock", outOfStock: true, image: "./Images/G28 Black.png", images: ["./Images/G28 Black.png"], description: "Compact retro gaming handheld with a 4.3-inch IPS display, 64GB expandable storage options, OTG support, and thousands of preloaded classic games.", specs: ["4.3-inch IPS Display","480×272 Resolution","16:9 Screen Ratio","60Hz Refresh Rate","2000mAh Battery","64GB Storage Version","Expandable TF / MicroSD","OTG Support","Multiple Retro Emulators","Plug-and-Play Design"] },
+      { id: 4, name: "Anime LED Box", price: 15000, badge: "", image: "./Images/AOT LED.png", images: ["./Images/Light Box Red.png"], description: "Decorative gaming-themed LED light box for desks, gaming rooms, shelves, and gifts.", specs: ["Gaming Room Decorations","LED Light Box","Side-Lit 3D Effect","Dimmable Brightness","Desk / Shelf Display","Gift-Friendly Design","Approx. 28×50×3.5cm","Ambient Gaming Lighting"] },
+      { id: 5, name: "Anime Bags", price: 32000, badge: "", image: "./Images/Bags.png", images: ["./Images/Bags.png","./Images/Bag AOT.png"], description: "Protective carrying bags for handheld consoles and gaming accessories, ideal for storage, travel, and daily use.", specs: ["Protective Carrying Bag","Fits Handheld Consoles","Accessory Space","Travel-Friendly","Scratch Protection","Shock-Resistant Exterior","Zipper Closure","Lightweight Build"] },
+    ];
+
+    const CART_KEY = "retro_cart";
+
+    function parseIQD(text) { return Number(String(text||"").replace(/IQD/gi,"").replace(/[^\d]/g,"") || 0); }
+    function formatIQD(n) { return (Number(n)||0).toLocaleString("en-US") + " " + STORE_CONFIG.currency; }
+    function formatPhoneDisplay(phone=STORE_CONFIG.phone) {
+      const d=String(phone).replace(/\D/g,"");
+      if(d.startsWith("07") && d.length===11) return `${d.slice(0,4)} ${d.slice(4,7)} ${d.slice(7)}`;
+      if(d.startsWith("964") && d.length>=12){ const local=`0${d.slice(3)}`; if(local.length===11) return `${local.slice(0,4)} ${local.slice(4,7)} ${local.slice(7)}`; return `+964 ${d.slice(3,6)} ${d.slice(6,9)} ${d.slice(9)}`; }
+      return phone;
+    }
+    function getPhoneTelHref(phone=STORE_CONFIG.phone) {
+      let d=String(phone).replace(/\D/g,"");
+      if(d.startsWith("0")) d=`964${d.slice(1)}`;
+      return `tel:+${d}`;
+    }
+    function applyStoreContactInfo() {
+      const display = formatPhoneDisplay();
+      const telHref = getPhoneTelHref();
+      document.querySelectorAll("[data-store-phone]").forEach(el=>{ el.textContent=display; if(el.tagName==="A") el.setAttribute("href",telHref); });
+      document.querySelectorAll("[data-store-logo]").forEach(el=>{ if(el.tagName==="IMG" && STORE_CONFIG.logo) el.src=STORE_CONFIG.logo; });
+    }
+    function getProduct(id) { return PRODUCTS.find(p=>String(p.id)===String(id)) || null; }
+    function getProductImages(product) { if(!product) return []; return Array.isArray(product.images) && product.images.length ? product.images : product.image ? [product.image] : []; }
+    function getProductVariants(product) { return Array.isArray(product?.variants) ? product.variants : []; }
+    function getVariantLabel(variant) {
+      if (!variant) return "";
+      if (variant.labelKey && typeof t === "function") {
+        const translated = t(variant.labelKey);
+        if (translated && translated !== variant.labelKey) return translated;
+      }
+      return variant.label || "";
+    }
+    function getVariantById(product, variantId) {
+      const variants = getProductVariants(product);
+      if (!variants.length) return null;
+      return variants.find((v) => String(v.id) === String(variantId)) || variants[0];
+    }
+    function isProductOutOfStock(product) { return Boolean(product?.outOfStock); }
+    function cartItemKey(item) { return `${item.id}::${item.variantId || ""}`; }
+    function getCart() { try { return JSON.parse(localStorage.getItem(CART_KEY)||"[]"); } catch { return []; } }
+    function setCart(cart) { localStorage.setItem(CART_KEY,JSON.stringify(cart)); updateCartBadge(); }
+    function getCartCount(cart) { return (cart||getCart()).reduce((s,i)=>s+(Number(i.qty)||0),0); }
+    function updateCartBadge() { const cnt=getCartCount(); document.querySelectorAll("[data-cart-badge]").forEach(el=>{ el.textContent=cnt>0?String(cnt):""; el.classList.toggle("is-visible",cnt>0); }); }
+    function upsertCartItem(item) {
+      const cart = getCart();
+      const key = cartItemKey(item);
+      const idx = cart.findIndex((x) => cartItemKey(x) === key);
+      if (idx >= 0) {
+        cart[idx].qty = (Number(cart[idx].qty) || 0) + (Number(item.qty) || 1);
+        cart[idx].name = item.name;
+        cart[idx].price = item.price;
+        cart[idx].img = item.img;
+        cart[idx].variantId = item.variantId || "";
+        cart[idx].variantLabel = item.variantLabel || "";
+      } else {
+        cart.push({
+          id: item.id,
+          variantId: item.variantId || "",
+          variantLabel: item.variantLabel || "",
+          name: item.name,
+          price: item.price,
+          img: item.img,
+          qty: Number(item.qty) || 1,
+        });
+      }
+      setCart(cart);
+      return cart;
+    }
+    function addProductToCart(productId, qty = 1, variantId = null) {
+      const product = getProduct(productId);
+      if (!product || isProductOutOfStock(product)) return null;
+      const localized = (typeof getLocalizedProduct === "function" ? getLocalizedProduct(product.id) : null) || product;
+      const variant = getVariantById(product, variantId);
+      const packQty = Number(variant?.packQty) || 1;
+      const unitPrice = Number(variant?.price ?? product.price) || 0;
+      const variantLabel = variant ? getVariantLabel(variant) : "";
+      const displayName = variantLabel ? `${localized.name} — ${variantLabel}` : localized.name;
+      upsertCartItem({
+        id: product.id,
+        variantId: variant?.id || "",
+        variantLabel,
+        name: displayName,
+        price: unitPrice,
+        img: product.image,
+        qty: (Number(qty) || 1) * packQty,
+      });
+      return { product, variant, displayName };
+    }
+    function computeOrder(cart,coupon) { const sub=cart.reduce((s,i)=>s+(Number(i.price)||0)*(Number(i.qty)||0),0); const d=sub>0?STORE_CONFIG.deliveryFee:0; let disc=0; if(coupon){ if(coupon.type==="percent") disc=Math.round(sub*coupon.value); else if(coupon.type==="fixed") disc=coupon.value; if(disc>sub) disc=sub; } const total=Math.max(0,sub-disc+d); return {subtotal:sub,discount:disc,delivery:d,total}; }
+    function resolveCoupon(code) { const raw=String(code||"").trim(); if(!raw) return null; const key=Object.keys(STORE_CONFIG.coupons).find(k=>k.toUpperCase()===raw.toUpperCase()); return key ? {...STORE_CONFIG.coupons[key],code:key} : null; }
+    function buildWhatsAppOrderMessage(cart,summary,customer={}) { const lang=typeof getCurrentLang==="function"?getCurrentLang():"en"; const lines=[]; if(lang==="ar"){ lines.push("طلب جديد من Retro Station"); lines.push(""); lines.push(`الاسم: ${customer.name||"-"}`); lines.push(`العنوان: ${customer.address||"-"}`); lines.push(`ملاحظات: ${customer.notes||"-"}`); lines.push(""); lines.push("المنتجات:"); cart.forEach((item,i)=>{ lines.push(`${i+1}. ${item.name} × ${item.qty} — ${formatIQD(Number(item.price)*Number(item.qty))}`); }); lines.push(""); lines.push(`المجموع الفرعي: ${formatIQD(summary.subtotal)}`); lines.push(`الخصم: ${formatIQD(summary.discount)}`); lines.push(`التوصيل: ${formatIQD(summary.delivery)}`); lines.push(`الإجمالي: ${formatIQD(summary.total)}`); return lines.join("\n"); } if(lang==="ku"){ lines.push("داواکاریی نوێ لە Retro Station"); lines.push(""); lines.push(`ناو: ${customer.name||"-"}`); lines.push(`ناونیشان: ${customer.address||"-"}`); lines.push(`تێبینی: ${customer.notes||"-"}`); lines.push(""); lines.push("بەرهەمەکان:"); cart.forEach((item,i)=>{ lines.push(`${i+1}. ${item.name} × ${item.qty} — ${formatIQD(Number(item.price)*Number(item.qty))}`); }); lines.push(""); lines.push(`کۆی لاوەکی: ${formatIQD(summary.subtotal)}`); lines.push(`داشکاندن: ${formatIQD(summary.discount)}`); lines.push(`گەیاندن: ${formatIQD(summary.delivery)}`); lines.push(`کۆی گشتی: ${formatIQD(summary.total)}`); return lines.join("\n"); } lines.push("New order from Retro Station"); lines.push(""); lines.push(`Name: ${customer.name||"-"}`); lines.push(`Address: ${customer.address||"-"}`); lines.push(`Notes: ${customer.notes||"-"}`); lines.push(""); lines.push("Products:"); cart.forEach((item,i)=>{ lines.push(`${i+1}. ${item.name} × ${item.qty} — ${formatIQD(Number(item.price)*Number(item.qty))}`); }); lines.push(""); lines.push(`Subtotal: ${formatIQD(summary.subtotal)}`); lines.push(`Discount: ${formatIQD(summary.discount)}`); lines.push(`Delivery: ${formatIQD(summary.delivery)}`); lines.push(`Total: ${formatIQD(summary.total)}`); return lines.join("\n"); }
+    function openWhatsAppOrder(cart,summary,customer={}) { const phone=String(STORE_CONFIG.whatsappNumber||"").replace(/[^\d]/g,""); if(!phone){ showToast("WhatsApp number missing.","error"); return false; } const msg=buildWhatsAppOrderMessage(cart,summary,customer); window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank","noopener,noreferrer"); return true; }
+    function getWhatsAppContactMessage() {
+      if (typeof t === "function") {
+        const msg = t("whatsapp.contact");
+        if (msg && msg !== "whatsapp.contact") return msg;
+      }
+      return "Hello Retro Station! I'd like to ask a few questions about your products and services.";
+    }
+    function openWhatsAppContact() {
+      const phone = String(STORE_CONFIG.whatsappNumber || "").replace(/[^\d]/g, "");
+      if (!phone) { showToast("WhatsApp number missing.", "error"); return false; }
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(getWhatsAppContactMessage())}`, "_blank", "noopener,noreferrer");
+      return true;
+    }
+    function bindWhatsAppContactLinks(root = document) {
+      root.querySelectorAll("[data-whatsapp-contact]").forEach((el) => {
+        if (el.dataset.whatsappBound === "1") return;
+        el.dataset.whatsappBound = "1";
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          openWhatsAppContact();
+        });
+      });
+    }
+    function submitOrder(cart,summary,customer={}) { if(!cart.length){ showToast(t("toast.cartEmpty"),"error"); return false; } if(!customer.name){ showToast(t("errors.nameRequired"),"error"); return false; } const opened=openWhatsAppOrder(cart,summary,customer); if(!opened) return false; showToast(t("toast.orderPlaced",{total:formatIQD(summary.total)})); localStorage.removeItem(CART_KEY); updateCartBadge(); return true; }
+    function showToast(message,type="success") { const existing=document.querySelector(".rs-toast"); if(existing) existing.remove(); const toast=document.createElement("div"); toast.className=`rs-toast rs-toast--${type}`; toast.innerHTML=`<i class="fas ${type==="error"?"fa-circle-exclamation":"fa-circle-check"}"></i><span>${message}</span>`; document.body.appendChild(toast); requestAnimationFrame(()=>toast.classList.add("is-visible")); setTimeout(()=>{ toast.classList.remove("is-visible"); setTimeout(()=>toast.remove(),300); },2400); }
+
+    // ---------- Product rendering (uses safeT) ----------
+    function offerText(key, fallback) {
+      if (typeof t === "function") {
+        const value = t(key);
+        if (value && value !== key) return value;
+      }
+      return fallback;
+    }
+
+    function renderVariantOptions(product, selectedId = null) {
+      const variants = getProductVariants(product);
+      if (!variants.length) return "";
+      const activeId = selectedId || variants[0].id;
+      return `
+        <div class="product-variants" data-variant-group="${product.id}">
+          ${variants.map((variant) => {
+            const label = getVariantLabel(variant);
+            const active = String(variant.id) === String(activeId) ? " is-active" : "";
+            const offer = variant.offer ? " is-offer" : "";
+            const originalPrice = Number(variant.originalPrice) || 0;
+            const discount = Number(variant.discountPercent) || 0;
+
+            if (variant.offer && originalPrice > 0) {
+              return `
+                <button type="button" class="variant-option offer-deal${active}${offer}" data-variant-id="${variant.id}" data-variant-price="${variant.price}" data-original-price="${originalPrice}" data-discount-percent="${discount}">
+                  <span class="offer-ribbon" aria-hidden="true">-${discount}%</span>
+                  <span class="offer-deal-body">
+                    <span class="offer-kicker">${offerText("variants.boardOfferTitle", "Special Offer")}</span>
+                    <span class="variant-option-label">${label}</span>
+                    <span class="offer-price-row">
+                      <span class="price-was">${formatIQD(originalPrice)}</span>
+                      <span class="price-now">${formatIQD(variant.price)} <small>${offerText("variants.boardOfferEach", "each")}</small></span>
+                    </span>
+                    <span class="offer-hint">${offerText("variants.boardOfferHint", "Buy 2 and get 11% off")}</span>
+                  </span>
+                </button>
+              `;
+            }
+
+            return `
+              <button type="button" class="variant-option${active}${offer}" data-variant-id="${variant.id}" data-variant-price="${variant.price}">
+                <span class="variant-option-label">${label}</span>
+                <span class="variant-option-price">${formatIQD(variant.price)}</span>
+              </button>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    function renderProductCard(product) {
+      const p = (typeof getLocalizedProduct === "function" ? getLocalizedProduct(product.id) : null) || product;
+      const outOfStock = isProductOutOfStock(p);
+      const variants = getProductVariants(p);
+      const defaultVariant = variants[0] || null;
+      const offerVariant = variants.find((v) => v.offer && v.originalPrice);
+      const badgeHtml = p.badge
+        ? `<div class="product-badge${outOfStock ? " is-oos" : ""}">${outOfStock ? safeT("product.outOfStock", p.badge) : p.badge}</div>`
+        : offerVariant
+          ? `<div class="product-badge is-offer-badge">${offerText("variants.boardOfferSave", `-${offerVariant.discountPercent || 11}%`)}</div>`
+          : "";
+      const price = defaultVariant ? defaultVariant.price : p.price;
+      const actionHtml = outOfStock
+        ? `<button type="button" class="btn-add-cart is-disabled" disabled>
+             <i class="fas fa-ban"></i> ${safeT("product.outOfStock", "Out of Stock")}
+           </button>`
+        : `<button type="button" class="btn-add-cart" data-add-cart="${p.id}" data-selected-variant="${defaultVariant?.id || ""}">
+             <i class="fas fa-cart-plus"></i> ${safeT("product.add", "Add to Cart")}
+           </button>`;
+
+      return `
+        <div class="col-12 col-md-6 col-lg-4">
+          <article class="product-card${outOfStock ? " is-oos" : ""}${offerVariant ? " has-offer" : ""}" data-product-id="${p.id}" data-product-link="./product-detail.html?id=${p.id}" role="link" tabindex="0" aria-label="${safeT("product.details", "View details")}: ${p.name}">
+            ${badgeHtml}
+            <div class="product-image">
+              <img src="${p.image}" alt="${p.name}" loading="lazy">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">${p.name}</h3>
+              <p class="product-description">${p.description}</p>
+              <div class="product-price-wrap">
+                <div class="product-price" data-price-display>${formatIQD(price)}</div>
+                ${offerVariant ? `<div class="product-offer-note">${offerText("variants.boardOfferHint", "Buy 2 and get 11% off")}</div>` : ""}
+              </div>
+              ${renderVariantOptions(p, defaultVariant?.id)}
+              <div class="product-actions">
+                ${actionHtml}
+              </div>
+            </div>
+          </article>
+        </div>
+      `;
+    }
+
+    function renderProductsGrid(containerId) {
+      const grid = document.getElementById(containerId);
+      if (!grid) return;
+      grid.innerHTML = PRODUCTS.map(renderProductCard).join("");
+      bindProductCards(grid);
+      bindVariantSelectors(grid);
+      bindAddToCartButtons(grid);
+    }
+
+    function bindProductCards(root=document) {
+      root.querySelectorAll("[data-product-link]").forEach(card => {
+        const openDetails = () => { window.location.href = card.dataset.productLink; };
+        card.addEventListener("click", openDetails);
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openDetails();
+          }
+        });
+      });
+    }
+
+    function updatePriceDisplay(priceEl, btn) {
+      if (!priceEl || !btn) return;
+      const price = Number(btn.dataset.variantPrice) || 0;
+      const original = Number(btn.dataset.originalPrice) || 0;
+      const wrap = priceEl.closest(".product-price-wrap") || priceEl.parentElement;
+
+      if (original > price) {
+        priceEl.innerHTML = `<span class="price-was">${formatIQD(original)}</span><span class="price-now">${formatIQD(price)}</span>`;
+        priceEl.classList.add("is-sale");
+        wrap?.classList.add("is-sale");
+      } else {
+        priceEl.textContent = formatIQD(price);
+        priceEl.classList.remove("is-sale");
+        wrap?.classList.remove("is-sale");
+      }
+    }
+
+    function bindVariantSelectors(root = document) {
+      root.querySelectorAll("[data-variant-group]").forEach((group) => {
+        const card = group.closest(".product-card");
+        const priceEl = card?.querySelector("[data-price-display]");
+        const addBtn = card?.querySelector("[data-add-cart]");
+
+        group.querySelectorAll(".variant-option").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            group.querySelectorAll(".variant-option").forEach((el) => el.classList.remove("is-active"));
+            btn.classList.add("is-active");
+            updatePriceDisplay(priceEl, btn);
+            if (addBtn) addBtn.dataset.selectedVariant = btn.dataset.variantId || "";
+          });
+        });
+      });
+    }
+
+    function bindAddToCartButtons(root=document) {
+      root.querySelectorAll("[data-add-cart]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault(); e.stopPropagation();
+          const id = btn.getAttribute("data-add-cart");
+          const variantId = btn.dataset.selectedVariant || null;
+          const result = addProductToCart(id, 1, variantId);
+          if (result) {
+            window.location.assign("./cart.html");
+          }
+        });
+      });
+    }
+
+    function refreshStoreUI() { renderProductsGrid("productsGrid"); }
+    function initStore() { updateCartBadge(); applyStoreContactInfo(); bindWhatsAppContactLinks(); window.addEventListener("languageChanged", refreshStoreUI); }
+
+    // ---------- Everything starts here ----------
+    document.addEventListener("DOMContentLoaded", () => {
+      initStore();
+      renderProductsGrid("productsGrid");   // NOW IT WILL WORK – even if i18n fails
+    });
+  </script>
+
+  <script>
+    // Navbar active link & smooth scrolling
+    document.addEventListener("DOMContentLoaded", () => {
+      const navLinks = document.querySelectorAll(".navbar .nav-link");
+      navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.forEach(l => l.classList.remove("active"));
+          link.classList.add("active");
+        });
+      });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || href === "#" || !href.startsWith("#")) return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+  <script>
+    (function () {
+      const REVIEW_IMAGES = Array.from({ length: 14 }, (_, i) =>
+        `./Reviews/photo_${i + 1}_2026-08-09_10-00-03.jpg`
+      );
+
+      let currentIndex = 0;
+      let touchStartX = 0;
+
+      const gallery = document.getElementById("reviewsGallery");
+      const lightbox = document.getElementById("reviewLightbox");
+      const lightboxImage = document.getElementById("reviewLightboxImage");
+      const lightboxCount = document.getElementById("reviewLightboxCount");
+
+      if (!gallery || !lightbox || !lightboxImage || !lightboxCount) return;
+
+      function openLabel() {
+        return typeof t === "function" ? t("reviews.open") : "Open review";
+      }
+
+      function renderGallery() {
+        const label = openLabel();
+        gallery.innerHTML = REVIEW_IMAGES.map((src, index) => `
+          <button type="button" class="review-tile" data-review-index="${index}" aria-label="${label} ${index + 1}">
+            <img src="${src}" alt="Customer review ${index + 1}" loading="lazy">
+            <span class="review-tile-overlay">
+              <span><i class="fas fa-expand"></i> ${label}</span>
+            </span>
+          </button>
+        `).join("");
+      }
+
+      function updateLightbox() {
+        const src = REVIEW_IMAGES[currentIndex];
+        lightboxImage.src = src;
+        lightboxImage.alt = `Customer review ${currentIndex + 1}`;
+        lightboxCount.textContent = `${currentIndex + 1} / ${REVIEW_IMAGES.length}`;
+      }
+
+      function openLightbox(index) {
+        currentIndex = index;
+        updateLightbox();
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+      }
+
+      function stepLightbox(delta) {
+        currentIndex = (currentIndex + delta + REVIEW_IMAGES.length) % REVIEW_IMAGES.length;
+        updateLightbox();
+      }
+
+      renderGallery();
+
+      gallery.addEventListener("click", (e) => {
+        const tile = e.target.closest("[data-review-index]");
+        if (!tile) return;
+        openLightbox(Number(tile.dataset.reviewIndex) || 0);
+      });
+
+      document.getElementById("reviewLightboxClose")?.addEventListener("click", closeLightbox);
+      document.getElementById("reviewLightboxPrev")?.addEventListener("click", () => stepLightbox(-1));
+      document.getElementById("reviewLightboxNext")?.addEventListener("click", () => stepLightbox(1));
+      document.getElementById("reviewLightboxPrevBtn")?.addEventListener("click", () => stepLightbox(-1));
+      document.getElementById("reviewLightboxNextBtn")?.addEventListener("click", () => stepLightbox(1));
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("is-open")) return;
+        if (e.key === "Escape") closeLightbox();
+        const rtl = document.body.classList.contains("is-rtl");
+        if (e.key === "ArrowLeft") stepLightbox(rtl ? 1 : -1);
+        if (e.key === "ArrowRight") stepLightbox(rtl ? -1 : 1);
+      });
+
+      lightbox.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0]?.clientX || 0;
+      }, { passive: true });
+
+      lightbox.addEventListener("touchend", (e) => {
+        if (!lightbox.classList.contains("is-open")) return;
+        const dx = (e.changedTouches[0]?.clientX || 0) - touchStartX;
+        if (Math.abs(dx) < 50) return;
+        stepLightbox(dx > 0 ? -1 : 1);
+      }, { passive: true });
+
+      window.addEventListener("languageChanged", renderGallery);
+    })();
+  </script>
+
+</body>
+</html>
